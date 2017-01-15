@@ -1,0 +1,643 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="学习一项工具，最快的方式就是边学便用。在学习 GUI 时我会边看API边写一个记事本，学习 web 框架时我会边学边写一个留言板。
+学习和工作上一直是在写后端代码，有一点前端基础，但没有用过JS框架，看到最近React特别火，就开始了边学 React 边写留言板。一共花了大概两天左右的时间入门 React 并写出了这个留言板。
+另外还收集了一些资料，比较适合刚接触 React 的人或是前端新手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 最简单的入门应用项目">
+<meta property="og:url" content="http://guodavid.tk/2016/08/29/React-Message-board/index.html">
+<meta property="og:site_name" content="爱曦的博客">
+<meta property="og:description" content="学习一项工具，最快的方式就是边学便用。在学习 GUI 时我会边看API边写一个记事本，学习 web 框架时我会边学边写一个留言板。
+学习和工作上一直是在写后端代码，有一点前端基础，但没有用过JS框架，看到最近React特别火，就开始了边学 React 边写留言板。一共花了大概两天左右的时间入门 React 并写出了这个留言板。
+另外还收集了一些资料，比较适合刚接触 React 的人或是前端新手。">
+<meta property="og:image" content="https://github.com/David-Guo/message-board/raw/master/picture/1.png">
+<meta property="og:updated_time" content="2016-08-29T07:57:14.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 最简单的入门应用项目">
+<meta name="twitter:description" content="学习一项工具，最快的方式就是边学便用。在学习 GUI 时我会边看API边写一个记事本，学习 web 框架时我会边学边写一个留言板。
+学习和工作上一直是在写后端代码，有一点前端基础，但没有用过JS框架，看到最近React特别火，就开始了边学 React 边写留言板。一共花了大概两天左右的时间入门 React 并写出了这个留言板。
+另外还收集了一些资料，比较适合刚接触 React 的人或是前端新手。">
+<meta name="twitter:image" content="https://github.com/David-Guo/message-board/raw/master/picture/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://guodavid.tk/2016/08/29/React-Message-board/"/>
+
+  <title> React 最简单的入门应用项目 | 爱曦的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">爱曦的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React 最简单的入门应用项目
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-29T00:00:00+08:00" content="2016-08-29">
+              2016-08-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习一项工具，最快的方式就是边学便用。在学习 GUI 时我会边看API边写一个记事本，学习 web 框架时我会边学边写一个留言板。</p>
+<p>学习和工作上一直是在写后端代码，有一点前端基础，但没有用过JS框架，看到最近React特别火，就开始了边学 React 边写留言板。一共花了大概两天左右的时间入门 React 并写出了这个留言板。</p>
+<p>另外还收集了一些资料，比较适合刚接触 React 的人或是前端新手。</p>
+<ul>
+<li><a href="http://javascript.ruanyifeng.com/#introduction" target="_blank" rel="external">阮一峰的JavaScript教程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="external">阮一峰的 react 教程</a></li>
+<li><a href="http://www.phperz.com/article/15/0712/140538.html" target="_blank" rel="external">react.js入门教程</a></li>
+<li><a href="http://itindex.net/detail/53885-webpack-react" target="_blank" rel="external">Webpack 和 React 小书</a></li>
+</ul>
+<p>接下来讲讲自己在用React开发留言板前端过程中遇到的坑和学习到的知识。项目路径：<a href="https://github.com/David-Guo/message-board" target="_blank" rel="external">https://github.com/David-Guo/message-board</a> 觉得对你有用的话，给个 star 呗。效果图如下</p>
+<p><img src="https://github.com/David-Guo/message-board/raw/master/picture/1.png" alt=""></p>
+<p>关于 React 的介绍和 Nodejs 安装，这里就不多介绍了，网上有相当丰富的资料。</p>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>在写 Js 代码之前我们需要定义好我们需要用什么编译器、相关的依赖包以及 npm 命令行脚本参数信息，这件事情就交给文件<code>package.json</code>去做。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"MessageBoard"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"js for MessageBorad"</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"webpack --progress --colors --watch"</span>,</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"david"</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^0.12.2"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"jsx-loader"</span>: <span class="string">"^0.12.2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p><code>scripts</code> 表示命令行参数，这样我们可以直接在命令行键入<code>npm start</code>，会替换成<code>webpack --progress --colors --watch</code>，来使用 webpack 构建项目。由于使用到了 webpack ，所以我们需要对 webpack 也进行一些配置，下面是一个典型的配置文件。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    entry : &#123;</span><br><span class="line">        index : "./index.js"</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool: 'source-map',</span><br><span class="line">    output : &#123;</span><br><span class="line">        path : "./lib",</span><br><span class="line">        filename : "bundle.js"</span><br><span class="line">    &#125;,</span><br><span class="line">    module : &#123;</span><br><span class="line">        loaders :[</span><br><span class="line">            &#123;test:/\.js$/, loader:'jsx-loader'&#125;</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>webpack.config.js</code> 文件则定义了输入输出的 js 文件路径、文件名、以及相关的编译器。</p>
+<ul>
+<li><code>entry</code> 表示入口文件是当前目录的 <code>index.js</code></li>
+<li><code>output</code> 表示输出文件是 <code>./build/bundle.js</code></li>
+<li><code>loader</code> 表示使用 <code>jsx-loader</code> 来编译 JSX 语法</li>
+</ul>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>写好配置文件，只需在命令行执行<code>npm start</code>，就可以看到构建信息，并且每次修改文件，都会自动刷新构建。</p>
+<p>我们的留言板将分成两个组件，一个表单，一个列表。</p>
+<h3 id="表单组件"><a href="#表单组件" class="headerlink" title="表单组件"></a>表单组件</h3><p>要注意这里当用户提交表单时，应该把表单的数据传回父组件，父组件提交数据到服务器，然后刷新评论列表组件，而不是直接在表单组件中提交数据到服务器。通过将父组件的提交表单函数传递给子组件作为<code>props</code>，子组件调用父组件的函数来实现这件事。在父组件的<code>render</code> 函数中加上 <code>&lt;MessageForm submit={this.submit} /&gt;</code>。表单组件的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MessageForm = React.createClass(&#123;</span><br><span class="line">	onSubmit: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">		<span class="keyword">var</span> name = <span class="keyword">this</span>.refs.name.getDOMNode().value.trim();</span><br><span class="line">		<span class="keyword">var</span> comment = <span class="keyword">this</span>.refs.comment.getDOMNode().value.trim();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">this</span>.props.submit(name, comment);</span><br><span class="line">		<span class="keyword">this</span>.refs.name.getDOMNode.value = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">this</span>.refs.comment.getDOMNode.value = <span class="string">""</span>;</span><br><span class="line">	&#125;,</span><br><span class="line">	render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span>(</span><br><span class="line">			&lt;div className="well"&gt;</span><br><span class="line">			&lt;h4&gt; Leave a Message &lt;/h4&gt;</span><br><span class="line">				&lt;div className="form-group"&gt;</span><br><span class="line">					&lt;label for="exampleinputemail1"&gt;your name&lt;/label&gt;</span><br><span class="line">					&lt;input ref="name" className="form-control" placeholder="your name"&gt;&lt;/input&gt;</span><br><span class="line">				&lt;/div&gt;</span><br><span class="line">				&lt;div className="form-group"&gt;</span><br><span class="line">					&lt;label for="exampleinputemail1"&gt;your comment&lt;/label&gt;</span><br><span class="line">					&lt;textarea ref="comment" className="form-control" placeholder="enter message"&gt;&lt;/textarea&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;a onClick=&#123;this.onSubmit&#125; className="btn btn-primary"&gt;submit&lt;/a&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>onSubmit</code> 函数的作用就是监听表单的提交事件和清空表单，在事件回调中调用<code>preventDefault()</code>来避免浏览器默认地提交表单。父组件的 <code>submit</code> 现在已经成为了子组件的一个属性，表单组件监听到表单提交事件后立即调用。<code>submit</code> 函数主要作用是做 AJAX 向服务器提交数据，然后刷新评论列表。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Container = React.createClass(&#123;</span><br><span class="line">	submit: <span class="function"><span class="keyword">function</span>(<span class="params">name, comment</span>) </span>&#123;</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type:<span class="string">'post'</span>,</span><br><span class="line">			url:<span class="string">'/post'</span>,</span><br><span class="line">			data:&#123;name:name, comment:comment&#125;</span><br><span class="line">		&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.listComment();</span><br><span class="line">		&#125;.bind(<span class="keyword">this</span>));</span><br><span class="line">	&#125;,</span><br><span class="line">	...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="列表组件"><a href="#列表组件" class="headerlink" title="列表组件"></a>列表组件</h3><p>列表组件比较简单，主要是渲染父组件传递过来的数据。由于传递给列表的数据是动态变化的，所以我们需要将 <code>data</code> 申明 <code>state</code>，传递代码是 <code>&lt;MessageList data={this.state.data} /&gt;</code>，然后在 <code>MessageList</code> 中可以通过 <code>props.data</code> 获取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MessageList = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">	render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> message = <span class="keyword">this</span>.props.data.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> (</span><br><span class="line">				&lt;li className="list-group-item"&gt;</span><br><span class="line">				&#123;item.name&#125;  留言于 (&#123;item.create_at&#125;)</span><br><span class="line">				&lt;p&gt; &#123;item.comment&#125; &lt;/p&gt;</span><br><span class="line">				&lt;/li&gt;</span><br><span class="line">			)</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">return</span>(</span><br><span class="line">			&lt;ul className="list-group" id="message-container"&gt;</span><br><span class="line">			&lt;li className="list-group-item"&gt;Placeholder message&lt;/li&gt;</span><br><span class="line">			&#123;message&#125;</span><br><span class="line">			&lt;/ul&gt;</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="更新状态"><a href="#更新状态" class="headerlink" title="更新状态"></a>更新状态</h2><p>当组件第一次创建的时候，我们想从服务器获取（使用GET方法）一些JSON数据，更新状态，反映出最新的数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Container = React.createClass(&#123;</span><br><span class="line">	getInitialState : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			data: []</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	listComment: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type:<span class="string">'get'</span>,</span><br><span class="line">			url:<span class="string">'/get'</span>,</span><br><span class="line">		&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(resp.status == <span class="string">"success"</span>)&#123;</span><br><span class="line">				<span class="keyword">this</span>.setState(&#123;</span><br><span class="line">					data:resp.data</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;.bind(<span class="keyword">this</span>));</span><br><span class="line">	&#125;,</span><br><span class="line">	componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.listComment();</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在这里，<code>componentDidMount</code> 是一个在组件被渲染的时候React自动调用的方法。动态更新的关键点是调用 <code>this.setState()</code>。我们把旧的评论数组替换成从服务器拿到的新的数组，然后UI自动更新。正是有了这种响应式，一个小的改变都会触发实时的更新。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此一个简单的留言板的大致逻辑功能就实习，我们用到了 React 的组件构建方式，通过 props ，state 在父子组件之间传递函数、数据，虚拟DOM节点的概念以及如何获取真实的DOM节点。由此可以大致感受如何使用 React 写前端已经 React 的思想。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/05/2015-7-5-Matlab-code/" rel="next" title="创意平板折叠桌动态展开Matlab源码">
+                <i class="fa fa-chevron-left"></i> 创意平板折叠桌动态展开Matlab源码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://pic.baike.soso.com/p/20120207/20120207100328-1819305443.jpg"
+               alt="David" />
+          <p class="site-author-name" itemprop="name">David</p>
+          <p class="site-description motion-element" itemprop="description">现在做的有意义的事，一定会在未来的某个时刻帮助到自己。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/David-Guo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ai-bing-22" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建"><span class="nav-number">1.</span> <span class="nav-text">构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#package"><span class="nav-number">1.1.</span> <span class="nav-text">package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack"><span class="nav-number">1.2.</span> <span class="nav-text">webpack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件"><span class="nav-number">2.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表单组件"><span class="nav-number">2.1.</span> <span class="nav-text">表单组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表组件"><span class="nav-number">2.2.</span> <span class="nav-text">列表组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新状态"><span class="nav-number">3.</span> <span class="nav-text">更新状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">David</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
